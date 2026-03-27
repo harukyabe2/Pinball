@@ -29,7 +29,7 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
-
+    Scene::SetBackground(ColorF(0.1, 0.2, 0.2));
 }
 
 void Game::LoadData()
