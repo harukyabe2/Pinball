@@ -1,0 +1,12 @@
+# Mac特有の隠しファイル（不要なゴミファイル）
+.DS_Store
+
+# ビルド時に生成される中間ファイル・出力フォルダ
+build/
+
+# Xcodeのユーザー固有の環境設定（他の人の環境に影響を与えないため）
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Macのデバッグ用ファイル（巨大なため除外）
+*.dSYM/
