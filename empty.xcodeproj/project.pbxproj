@@ -37,6 +37,9 @@
 		2C5C471126B4F08E005E8C85 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C471026B4F08E005E8C85 /* libzlib.a */; };
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
+		6E2EBEAB2F79288200B77761 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E2EBEAA2F79288100B77761 /* Ball.cpp */; };
+		6E7C909D2F7690A400EBCD1E /* Flipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C909C2F7690A400EBCD1E /* Flipper.cpp */; };
+		6EAA8F1F2F793C7200C1B1F3 /* Plunger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */; };
 		6ED972FC2F760F8100DD91CF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED972FB2F760F8000DD91CF /* Game.cpp */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +76,12 @@
 		2C5C471026B4F08E005E8C85 /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.a; path = ../../lib/macOS/zlib/libzlib.a; sourceTree = "<group>"; };
 		2C6906D72298140F00A427D0 /* engine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = engine; path = App/engine; sourceTree = "<group>"; };
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
+		6E2EBEAA2F79288100B77761 /* Ball.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
+		6E7C909A2F768FA100EBCD1E /* Ball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
+		6E7C909B2F768FA100EBCD1E /* Flipper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Flipper.hpp; sourceTree = "<group>"; };
+		6E7C909C2F7690A400EBCD1E /* Flipper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Flipper.cpp; sourceTree = "<group>"; };
+		6EAA8F1D2F793C7100C1B1F3 /* Plunger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Plunger.hpp; sourceTree = "<group>"; };
+		6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Plunger.cpp; sourceTree = "<group>"; };
 		6ED972FA2F760F8000DD91CF /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		6ED972FB2F760F8000DD91CF /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +150,12 @@
 				2C1778991CE0AA7C00BB8AD0 /* Main.cpp */,
 				6ED972FA2F760F8000DD91CF /* Game.hpp */,
 				6ED972FB2F760F8000DD91CF /* Game.cpp */,
+				6E7C909A2F768FA100EBCD1E /* Ball.hpp */,
+				6E7C909B2F768FA100EBCD1E /* Flipper.hpp */,
+				6E7C909C2F7690A400EBCD1E /* Flipper.cpp */,
+				6E2EBEAA2F79288100B77761 /* Ball.cpp */,
+				6EAA8F1D2F793C7100C1B1F3 /* Plunger.hpp */,
+				6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -247,7 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E2EBEAB2F79288200B77761 /* Ball.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
+				6E7C909D2F7690A400EBCD1E /* Flipper.cpp in Sources */,
+				6EAA8F1F2F793C7200C1B1F3 /* Plunger.cpp in Sources */,
 				6ED972FC2F760F8100DD91CF /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

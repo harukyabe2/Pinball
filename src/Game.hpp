@@ -1,8 +1,11 @@
 #pragma once
 #include <Siv3D.hpp>
+#include "Ball.hpp"
+#include "Flipper.hpp"
+#include "Plunger.hpp"
 
-#define sceneW Scene::Width()
-#define sceneH Scene::Height()
+#define SCENEW Scene::Width()
+#define SCENEH Scene::Height()
 
 class Game
 {
@@ -17,10 +20,38 @@ class Game
         void GenerateOutput();
         void LoadData();
 
+        LineString mCreateCircleFrame(const Vec2& center, double radius, double angleOffset, int32 segments);
+
         Stopwatch mGameTimer;
         Font mFont;
         Camera2D mCamera;
 
+        // Physics
+        P2World mWorld;
+        double mStepTime;
+        double mAccumulatedTime;
+
+        // Flipper
+        Vec2 mLeftFlipperAnchor;
+        Vec2 mRightFlipperAnchor;
+        Flipper mLeftFlipper;
+        Flipper mRightFlipper;
+
+        // Process input
+        bool mKeyFIsPressed;
+        bool mKeyJIsPressed;
+        bool mKeySpaceIsPressed;
+
+        // Ball
+        Ball mBall;
+
+        // Plunger
+        Plunger mPlunger;
+        double mCharge;
+
+        // Game elements
         int32 mScore;
         int32 mBallCount;
+        LineString mGameFrame;
+        Array<P2Body> mFrames;
 };
