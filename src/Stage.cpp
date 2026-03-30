@@ -2,28 +2,58 @@
 
 // Constructor
 Stage::Stage(P2World& world)
+: mCharge(0.0)
 {
-    LoadStage(world);
+    LoadFirstStage(world);
 }
 
 // Update stage
-void Stage::Update()
+void Stage::Update(double deltaTime, Ball& ball, bool keySpace, bool keyF, bool keyJ)
 {
-    // Update items
-    for (auto& item : mItems)
+    // Update plunger and ball
+    Vec2 plungerPos = Vec2{60, 200};
+    if (keySpace)
     {
-        item.Update();
+        mCharge += 180.0 * deltaTime;
+        if (mCharge > 180.0)
+        {
+            mCharge = 180.0;
+        }
+        mPlunger.SetPosition(plungerPos + Vec2{0, mCharge});
     }
+    else if (mCharge > 0.0)
+    {
+        Vec2 ballPos = ball.GetPosition();
+        if (ballPos.x > 50 && ballPos.y > 0)
+        {
+            ball.SetPosition(plungerPos);
+            double impulse = -1 * mCharge;
+            ball.AddImpulse(Vec2{0, impulse});
+        }
+        mPlunger.SetPosition(plungerPos);
+        mCharge = 0.0;
+    }
+
+    // Update flippers
+    mLeftFlipper.AddTorque(keyF ? -80000 : 40000);
+    mRightFlipper.AddTorque(keyJ ? 80000 : -40000);
 }
 
 // Draw
 void Stage::Draw() const
 {
+    // Draw flippers
+    mLeftFlipper.Draw();
+    mRightFlipper.Draw();
+
     // Draw walls
     for (const auto& wall : mWalls)
     {
         wall.draw(Palette::Midnightblue);
     }
+
+    // Draw plunger
+    mPlunger.Draw();
 
     // Draw bumpers
     for (const auto& bumper : mBumpers)
@@ -35,6 +65,15 @@ void Stage::Draw() const
     for (const auto& item : mItems)
     {
         item.Draw();
+    }
+}
+
+// Update items
+void Stage::UpdateItems()
+{
+    for (auto& item : mItems)
+    {
+        item.Update();
     }
 }
 
@@ -67,8 +106,18 @@ LineString Stage::mCreateCircleWall(const Vec2& center, double radius, double an
 }
 
 // Load Stage
-void Stage::LoadStage(P2World& world)
+void Stage::LoadFirstStage(P2World& world)
 {
+    // Create flippers
+    mLeftFlipperAnchor = Vec2{-320, 360};
+    mRightFlipperAnchor = Vec2{-180, 360};
+    mLeftFlipper = Flipper(world, mLeftFlipperAnchor, Vec2{50, 0}, -20_deg, 20_deg);
+    mRightFlipper = Flipper(world, mRightFlipperAnchor, Vec2{-50, 0}, -20_deg, 20_deg);
+
+    // Create plunger
+    mPlunger = Plunger(world, Vec2{60, 200}, SizeF{30, 30});
+
+    // Create walls
     LineString outerWall;
     outerWall << Vec2{-320, 390} << Vec2{-320, 360} << Vec2{-485, 290} << Vec2{-490, 15};
     outerWall.append(mCreateCircleWall(Vec2{-250, -185}, 200, 225_deg, 46));
@@ -95,6 +144,7 @@ void Stage::LoadStage(P2World& world)
     Polygon thickCenterWall = centerWall.calculateRoundBuffer(10);
     mWalls << world.createPolygon(P2Static, Vec2{0, 0}, thickCenterWall, P2Material{});
 
+    // Create bumpers
     LineString leftTriangleBumper;
     leftTriangleBumper << Vec2{-373, 286} << Vec2{-439, 258} << Vec2{-439, 168} << Vec2{-371, 286};
     Polygon thickleftTriangleBumper = leftTriangleBumper.calculateRoundBuffer(3);
@@ -110,6 +160,7 @@ void Stage::LoadStage(P2World& world)
     Polygon thickCircleBumper = circleBumper.calculateRoundBuffer(3);
     mBumpers.push_back(Bumper(world, thickCircleBumper));
 
+    // Create items
     for (int32 i = 0; i < 46; i += 4)
     {
         Vec2 pos = OffsetCircular(Vec2{-250, -185}, 170, 225_deg + (i * 3_deg));

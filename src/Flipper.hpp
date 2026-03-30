@@ -4,6 +4,7 @@
 class Flipper
 {
     public:
+        Flipper() = default;
         Flipper(P2World& world, const Vec2& anchor, const Vec2& tipOffset, double lowerAngle, double upperAngle);
 
         void Draw() const;

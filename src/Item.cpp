@@ -12,7 +12,7 @@ void Item::Update()
     if (not mIsActive && mTimer.sF() > 30.0)
     {
         mIsActive = true;
-        mTimer.reset();
+        mTimer.restart();
     }
 }
 

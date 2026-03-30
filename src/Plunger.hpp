@@ -4,7 +4,8 @@
 class Plunger
 {
     public:
-        Plunger(P2World& world);
+        Plunger() = default;
+        Plunger(P2World& world, const Vec2& pos, const SizeF& size);
 
         void Draw() const;
 
