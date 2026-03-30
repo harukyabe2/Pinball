@@ -18,7 +18,6 @@ class Game
         void GenerateOutput();
         void LoadData();
 
-        Stopwatch mGameTimer;
         Font mFont;
         Camera2D mCamera;
 

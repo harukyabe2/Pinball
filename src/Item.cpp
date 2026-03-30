@@ -3,7 +3,17 @@
 Item::Item(Vec2 pos, double r)
 : mCircle(pos, r)
 , mIsActive(true)
+, mTimer(StartImmediately::Yes)
 {
+}
+
+void Item::Update()
+{
+    if (not mIsActive && mTimer.sF() > 30.0)
+    {
+        mIsActive = true;
+        mTimer.reset();
+    }
 }
 
 void Item::Draw() const

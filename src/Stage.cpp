@@ -1,15 +1,22 @@
 #include "Stage.hpp"
 
+// Constructor
 Stage::Stage(P2World& world)
 {
     LoadStage(world);
 }
 
+// Update stage
 void Stage::Update()
 {
-
+    // Update items
+    for (auto& item : mItems)
+    {
+        item.Update();
+    }
 }
 
+// Draw
 void Stage::Draw() const
 {
     // Draw walls
@@ -59,6 +66,7 @@ LineString Stage::mCreateCircleWall(const Vec2& center, double radius, double an
     return wall;
 }
 
+// Load Stage
 void Stage::LoadStage(P2World& world)
 {
     LineString outerWall;
@@ -92,9 +100,9 @@ void Stage::LoadStage(P2World& world)
     Polygon thickleftTriangleBumper = leftTriangleBumper.calculateRoundBuffer(3);
     mBumpers.push_back(Bumper(world, thickleftTriangleBumper));
 
-    LineString RightTriangleBumper;
-    RightTriangleBumper << Vec2{-127, 286} << Vec2{-61, 258} << Vec2{-61, 168} << Vec2{-129, 286};
-    Polygon thickRightTriangleBumper = RightTriangleBumper.calculateRoundBuffer(3);
+    LineString rightTriangleBumper;
+    rightTriangleBumper << Vec2{-127, 286} << Vec2{-61, 258} << Vec2{-61, 168} << Vec2{-129, 286};
+    Polygon thickRightTriangleBumper = rightTriangleBumper.calculateRoundBuffer(3);
     mBumpers.push_back(Bumper(world, thickRightTriangleBumper));
 
     LineString circleBumper;

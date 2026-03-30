@@ -2,8 +2,7 @@
 
 // Constructor
 Game::Game()
-: mGameTimer{StartImmediately::Yes}
-, mFont{FontMethod::MSDF, 48, Typeface::Bold}
+: mFont{FontMethod::MSDF, 48, Typeface::Bold}
 , mCamera{Vec2{0, 0}, 1.0, CameraControl::None_}
 , mStepTime(1.0 / 200.0)
 , mAccumulatedTime(0.0)
@@ -116,7 +115,11 @@ void Game::UpdateGame()
         mWorld.update(mStepTime);
     }
 
+    // Check collisions and update score
     mScore += mStage.CheckItemCollisions(mBall.GetPosition(), 12.0);
+
+    // Update stage elements
+    mStage.Update();
 
     // Check if the ball is out of bounds
     if (mBallCount > 0 && mBall.GetPosition().y > 400)
@@ -162,5 +165,4 @@ void Game::LoadData()
 // Shutdown the game
 void Game::Shutdown()
 {
-
 }
