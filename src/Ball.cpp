@@ -20,12 +20,12 @@ void Ball::AddImpulse(const Vec2& impulse)
     mBody.applyLinearImpulse(impulse);
 }
 
-const Vec2 Ball::GetPosition()
+const Vec2 Ball::GetPos()
 {
     return mBody.getPos();
 }
 
-void Ball::SetPosition(const Vec2& pos)
+void Ball::SetPos(const Vec2& pos)
 {
     mBody.setPos(pos);
 }

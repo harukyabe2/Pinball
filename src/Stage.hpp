@@ -11,10 +11,11 @@ class Stage
     public:
         Stage(P2World& world);
 
-        void Update(double deltaTime, Ball& ball, bool keySpace, bool keyF, bool keyJ);
+        void Update(double deltaTime, Ball& ball, bool keySpace);
         void Draw() const;
 
         void UpdateItems();
+        void UpdateFlippers(bool keyF, bool keyJ);
         int32 CheckItemCollisions(const Vec2& ballPos, double ballRadius);
     private:
         LineString mCreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments);

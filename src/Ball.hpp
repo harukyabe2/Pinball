@@ -11,8 +11,8 @@ class Ball
         void Delete();
         void AddImpulse(const Vec2& impulse);
 
-        const Vec2 GetPosition();
-        void SetPosition(const Vec2& pos);
+        const Vec2 GetPos();
+        void SetPos(const Vec2& pos);
         void SetState(bool isAwake);
     private:
         P2Body mBody;

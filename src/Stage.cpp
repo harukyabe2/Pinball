@@ -8,7 +8,7 @@ Stage::Stage(P2World& world)
 }
 
 // Update stage
-void Stage::Update(double deltaTime, Ball& ball, bool keySpace, bool keyF, bool keyJ)
+void Stage::Update(double deltaTime, Ball& ball, bool keySpace)
 {
     // Update plunger and ball
     Vec2 plungerPos = Vec2{60, 200};
@@ -23,10 +23,10 @@ void Stage::Update(double deltaTime, Ball& ball, bool keySpace, bool keyF, bool 
     }
     else if (mCharge > 0.0)
     {
-        Vec2 ballPos = ball.GetPosition();
+        Vec2 ballPos = ball.GetPos();
         if (ballPos.x > 50 && ballPos.y > 0)
         {
-            ball.SetPosition(plungerPos);
+            ball.SetPos(plungerPos);
             double impulse = -1 * mCharge;
             ball.AddImpulse(Vec2{0, impulse});
         }
@@ -34,9 +34,6 @@ void Stage::Update(double deltaTime, Ball& ball, bool keySpace, bool keyF, bool 
         mCharge = 0.0;
     }
 
-    // Update flippers
-    mLeftFlipper.AddTorque(keyF ? -80000 : 40000);
-    mRightFlipper.AddTorque(keyJ ? 80000 : -40000);
 }
 
 // Draw
@@ -75,6 +72,13 @@ void Stage::UpdateItems()
     {
         item.Update();
     }
+}
+
+// Update flippers
+void Stage::UpdateFlippers(bool keyF, bool keyJ)
+{
+    mLeftFlipper.AddTorque(keyF ? -80000 : 40000);
+    mRightFlipper.AddTorque(keyJ ? 80000 : -40000);
 }
 
 // Check item collisions and return the score

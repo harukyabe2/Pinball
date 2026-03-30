@@ -64,22 +64,23 @@ void Game::UpdateGame()
 
     // Update stage elements
     mBall.SetState(true);
-    mStage.Update(deltaTime, mBall, mKeySpaceIsPressed, mKeyFIsPressed, mKeyJIsPressed);
+    mStage.Update(deltaTime, mBall, mKeySpaceIsPressed);
 
     // Update physics
     for (mAccumulatedTime += deltaTime; mStepTime <= mAccumulatedTime; mAccumulatedTime -= mStepTime)
     {
+        mStage.UpdateFlippers(mKeyFIsPressed, mKeyJIsPressed);
         mWorld.update(mStepTime);
     }
 
     // Check collisions and update score
-    mScore += mStage.CheckItemCollisions(mBall.GetPosition(), 12.0);
+    mScore += mStage.CheckItemCollisions(mBall.GetPos(), 12.0);
 
     // Update items
     mStage.UpdateItems();
 
     // Check if the ball is out of bounds
-    if (mBallCount > 0 && mBall.GetPosition().y > 400)
+    if (mBallCount > 0 && mBall.GetPos().y > 400)
     {
         mBall.Delete();
         --mBallCount;
