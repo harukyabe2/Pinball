@@ -18,7 +18,7 @@ Game::Game()
 , mPlunger(mWorld)
 , mCharge(0.0)
 , mScore(0)
-, mBallCount(3)
+, mBallCount(5) // 3
 , mGameFrame{
     Vec2{300 - SCENEW, -1 * SCENEH / 2 - 100},
     Vec2{300 - SCENEW, 100 + SCENEH / 2},
@@ -38,6 +38,7 @@ bool Game::Initialize()
     Window::SetTitle(U"Pinball Game");
 
     LoadData();
+
     return true;
 }
 
@@ -55,6 +56,7 @@ void Game::RunLoop()
 // Process user input
 void Game::ProcessInput()
 {
+    // Flipper controls
     if (KeyF.pressed())
     {
         mKeyFIsPressed = true;
@@ -63,7 +65,6 @@ void Game::ProcessInput()
     {
         mKeyFIsPressed = false;
     }
-
     if (KeyJ.pressed())
     {
         mKeyJIsPressed = true;
@@ -73,6 +74,7 @@ void Game::ProcessInput()
         mKeyJIsPressed = false;
     }
 
+    // Plunger control
     mKeySpaceIsPressed = KeySpace.pressed();
 }
 
@@ -81,6 +83,7 @@ void Game::UpdateGame()
 {
     double deltaTime = Scene::DeltaTime();
 
+    // Update plunger and ball
     Vec2 plungerPos = Vec2{60, 200};
     if (mKeySpaceIsPressed)
     {
@@ -104,6 +107,7 @@ void Game::UpdateGame()
         mCharge = 0.0;
     }
 
+    // Update physics
     for (mAccumulatedTime += deltaTime; mStepTime <= mAccumulatedTime; mAccumulatedTime -= mStepTime)
     {
         mLeftFlipper.AddTorque(mKeyFIsPressed ? -80000 : 40000);
@@ -112,6 +116,7 @@ void Game::UpdateGame()
         mWorld.update(mStepTime);
     }
 
+    // Check if the ball is out of bounds
     if (mBallCount > 0 && mBall.GetPosition().y > 400)
     {
         mBall.Delete();
@@ -138,6 +143,11 @@ void Game::GenerateOutput()
     for (const auto& frame : mFrames)
     {
         frame.draw(Palette::Midnightblue);
+    }
+
+    for (const auto& bumper : mBumpers)
+    {
+        bumper.Draw();
     }
 
     mPlunger.Draw();
@@ -177,8 +187,24 @@ void Game::LoadData()
     centerWall.append(mCreateCircleFrame(Vec2{-250, -185}, 140, 60_deg, 21));
     Polygon thickCenterWall = centerWall.calculateRoundBuffer(10);
     mFrames << mWorld.createPolygon(P2Static, Vec2{0, 0}, thickCenterWall, P2Material{});
+
+    LineString leftTriangleBumper;
+    leftTriangleBumper << Vec2{-373, 286} << Vec2{-439, 258} << Vec2{-439, 168} << Vec2{-371, 286};
+    Polygon thickleftTriangleBumper = leftTriangleBumper.calculateRoundBuffer(3);
+    mBumpers.push_back(Bumper(mWorld, thickleftTriangleBumper));
+
+    LineString RightTriangleBumper;
+    RightTriangleBumper << Vec2{-127, 286} << Vec2{-61, 258} << Vec2{-61, 168} << Vec2{-129, 286};
+    Polygon thickRightTriangleBumper = RightTriangleBumper.calculateRoundBuffer(3);
+    mBumpers.push_back(Bumper(mWorld, thickRightTriangleBumper));
+
+    LineString circleBumper;
+    circleBumper.append(mCreateCircleFrame(Vec2{-250, -185}, 20, 0_deg, 120));
+    Polygon thickCircleBumper = circleBumper.calculateRoundBuffer(3);
+    mBumpers.push_back(Bumper(mWorld, thickCircleBumper));
 }
 
+// Create circle frame points
 LineString Game::mCreateCircleFrame(const Vec2& center, double radius, double angleOffset, int32 segments)
 {
     LineString frame;

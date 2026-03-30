@@ -41,6 +41,7 @@
 		6E7C909D2F7690A400EBCD1E /* Flipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C909C2F7690A400EBCD1E /* Flipper.cpp */; };
 		6EAA8F1F2F793C7200C1B1F3 /* Plunger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */; };
 		6ED972FC2F760F8100DD91CF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED972FB2F760F8000DD91CF /* Game.cpp */; };
+		6EF911F42F7A178600C85C6D /* Bumper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF911F32F7A178500C85C6D /* Bumper.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,8 @@
 		6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Plunger.cpp; sourceTree = "<group>"; };
 		6ED972FA2F760F8000DD91CF /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		6ED972FB2F760F8000DD91CF /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		6EF911F22F7A178500C85C6D /* Bumper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bumper.hpp; sourceTree = "<group>"; };
+		6EF911F32F7A178500C85C6D /* Bumper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bumper.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,8 @@
 				6E2EBEAA2F79288100B77761 /* Ball.cpp */,
 				6EAA8F1D2F793C7100C1B1F3 /* Plunger.hpp */,
 				6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */,
+				6EF911F22F7A178500C85C6D /* Bumper.hpp */,
+				6EF911F32F7A178500C85C6D /* Bumper.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EF911F42F7A178600C85C6D /* Bumper.cpp in Sources */,
 				6E2EBEAB2F79288200B77761 /* Ball.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
 				6E7C909D2F7690A400EBCD1E /* Flipper.cpp in Sources */,

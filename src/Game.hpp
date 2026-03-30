@@ -3,6 +3,7 @@
 #include "Ball.hpp"
 #include "Flipper.hpp"
 #include "Plunger.hpp"
+#include "Bumper.hpp"
 
 #define SCENEW Scene::Width()
 #define SCENEH Scene::Height()
@@ -48,6 +49,9 @@ class Game
         // Plunger
         Plunger mPlunger;
         double mCharge;
+
+        // Bumper
+        Array<Bumper> mBumpers;
 
         // Game elements
         int32 mScore;
