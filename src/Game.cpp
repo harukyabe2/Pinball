@@ -2,8 +2,7 @@
 
 // Constructor
 Game::Game()
-: mFont{FontMethod::MSDF, 48, Typeface::Bold}
-, mCamera{Vec2{0, 0}, 1.0, CameraControl::None_}
+: mCamera{Vec2{0, 0}, 1.0, CameraControl::None_}
 , mStepTime(1.0 / 200.0)
 , mAccumulatedTime(0.0)
 , mBall(mWorld)
@@ -50,7 +49,15 @@ void Game::RunLoop()
 void Game::ProcessInput()
 {
     // Flipper controls
+    if (KeyF.down())
+    {
+        mStage.GetFlipper(true).PlaySound();
+    }
     mKeyFIsPressed = KeyF.pressed();
+    if (KeyJ.down())
+    {
+        mStage.GetFlipper(false).PlaySound();
+    }
     mKeyJIsPressed = KeyJ.pressed();
 
     // Plunger control
@@ -71,6 +78,9 @@ void Game::UpdateGame()
     {
         mStage.UpdateFlippers(mKeyFIsPressed, mKeyJIsPressed);
         mWorld.update(mStepTime);
+
+        // Update bumpers
+        mStage.UpdateBumpers(mWorld.getCollisions());
     }
 
     // Check collisions and update score
@@ -103,13 +113,20 @@ void Game::GenerateOutput()
     mGameFrame.drawClosed(5, Palette::White);
 
     // Draw game elements
-    mFont(U"SCORE\n{:0>5}"_fmt(mScore)).drawAt(300, -300);
-    mFont(U"BALL\n  {:0>2}"_fmt(mBallCount)).drawAt(300, -100);
+    FontAsset(U"UI")(U"SCORE\n{:0>5}"_fmt(mScore)).drawAt(300, -300);
+    FontAsset(U"UI")(U"BALL\n  {:0>2}"_fmt(mBallCount)).drawAt(300, -100);
 }
 
 // Load game data
 void Game::LoadData()
 {
+    // Register font
+    FontAsset::Register(U"UI", FontMethod::MSDF, 48, Typeface::Bold);
+
+    // Register sound
+    AudioAsset::Register(U"Coin", U"sound/ItemCoin.wav");
+    AudioAsset::Register(U"Bumper", U"sound/Bumper.wav");
+    AudioAsset::Register(U"Flipper", U"sound/Flipper.wav");
 }
 
 

@@ -33,7 +33,9 @@ bool Item::CheckHit(const Vec2& ballPos, double ballRadius)
 
     if (mCircle.intersects(Circle{ballPos, ballRadius}))
     {
+        AudioAsset(U"Coin").playOneShot();
         mIsActive = false;
+        mTimer.restart();
         return true;
     }
 

@@ -14,9 +14,12 @@ class Stage
         void Update(double deltaTime, Ball& ball, bool keySpace);
         void Draw() const;
 
+        void UpdateBumpers(const HashTable<P2ContactPair, P2Collision>& collisions);
         void UpdateItems();
         void UpdateFlippers(bool keyF, bool keyJ);
         int32 CheckItemCollisions(const Vec2& ballPos, double ballRadius);
+
+        const Flipper& GetFlipper(bool isLeft) const { return isLeft ? mLeftFlipper : mRightFlipper; };
     private:
         LineString mCreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments);
         void LoadFirstStage(P2World& world);

@@ -16,7 +16,7 @@ class Game
         void GenerateOutput();
         void LoadData();
 
-        Font mFont;
+        // Camera
         Camera2D mCamera;
 
         // Physics

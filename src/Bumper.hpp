@@ -6,7 +6,11 @@ class Bumper
     public:
         Bumper(P2World& world, Polygon polygon);
 
+        void Update(const HashTable<P2ContactPair, P2Collision>& collisions);
         void Draw() const;
     private:
         P2Body mBody;
+        P2BodyID mBodyID;
+        Polygon mPolygon;
+        Stopwatch mTimer;
 };

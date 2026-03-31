@@ -65,6 +65,15 @@ void Stage::Draw() const
     }
 }
 
+// Update bumpers
+void Stage::UpdateBumpers(const HashTable<P2ContactPair, P2Collision>& collisions)
+{
+    for (auto& bumper : mBumpers)
+    {
+        bumper.Update(collisions);
+    }
+}
+
 // Update items
 void Stage::UpdateItems()
 {

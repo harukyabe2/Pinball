@@ -23,3 +23,8 @@ void Flipper::AddTorque(double torque)
 {
     mBody.applyTorque(torque);
 }
+
+void Flipper::PlaySound() const
+{
+    AudioAsset(U"Flipper").playOneShot();
+}
