@@ -10,6 +10,11 @@ void Plunger::Draw() const
     mBody.draw(Palette::Midnightblue);
 }
 
+void Plunger::PlaySound() const
+{
+    AudioAsset(U"Plunger").playOneShot();
+}
+
 void Plunger::SetPosition(const Vec2& pos)
 {
     mBody.setPos(pos);

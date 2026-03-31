@@ -19,7 +19,8 @@ class Stage
         void UpdateFlippers(bool keyF, bool keyJ);
         int32 CheckItemCollisions(const Vec2& ballPos, double ballRadius);
 
-        const Flipper& GetFlipper(bool isLeft) const { return isLeft ? mLeftFlipper : mRightFlipper; };
+        const Flipper& GetFlipper(bool isLeft) const { return isLeft ? mLeftFlipper : mRightFlipper; }
+        const Plunger& GetPlunger() const { return mPlunger; }
     private:
         LineString mCreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments);
         void LoadFirstStage(P2World& world);

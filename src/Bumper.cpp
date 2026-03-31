@@ -18,14 +18,10 @@ void Bumper::Update(const HashTable<P2ContactPair, P2Collision>& collisions)
 
     for (auto&& [pair, collision] : collisions)
 	{
-				if (pair.a == mBodyID)
-				{
-                    isCollided = true;
-				}
-				else if (pair.b == mBodyID)
-				{
-                    isCollided = true;
-				}
+		if (pair.a == mBodyID || pair.b == mBodyID)
+		{                
+            isCollided = true;
+		}
 	}
 
     if (isCollided && mTimer.sF() > 0.1)
@@ -38,4 +34,8 @@ void Bumper::Update(const HashTable<P2ContactPair, P2Collision>& collisions)
 void Bumper::Draw() const
 {
     mBody.draw(Palette::Red);
+    if (mTimer.sF() < 0.20)
+    {
+        mBody.draw(Palette::White);
+    }
 }

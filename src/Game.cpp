@@ -62,6 +62,10 @@ void Game::ProcessInput()
 
     // Plunger control
     mKeySpaceIsPressed = KeySpace.pressed();
+    if (KeySpace.up())
+    {
+        mStage.GetPlunger().PlaySound();
+    }
 }
 
 // Update game state
@@ -127,6 +131,7 @@ void Game::LoadData()
     AudioAsset::Register(U"Coin", U"sound/ItemCoin.wav");
     AudioAsset::Register(U"Bumper", U"sound/Bumper.wav");
     AudioAsset::Register(U"Flipper", U"sound/Flipper.wav");
+    AudioAsset::Register(U"Plunger", U"sound/Plunger.wav");
 }
 
 

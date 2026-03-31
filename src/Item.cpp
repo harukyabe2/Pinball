@@ -21,6 +21,8 @@ void Item::Draw() const
     if (mIsActive)
     {
         mCircle.draw(Palette::Yellow);
+        double blinkAlpha = Periodic::Square0_1(1.0s);
+        mCircle.draw(ColorF{1.0, 1.0, 1.0, blinkAlpha});
     }
 }
 

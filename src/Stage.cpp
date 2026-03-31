@@ -184,4 +184,9 @@ void Stage::LoadFirstStage(P2World& world)
         Vec2 pos = OffsetCircular(Vec2{-250, -185}, 170, 60_deg + (i * 3_deg));
         mItems << Item(pos, 7);
     }
+    for (int32 i = 0; i < 120; i += 10)
+    {
+        Vec2 pos = OffsetCircular(Vec2{-250, 150}, 70, 0_deg + (i * 3_deg));
+        mItems << Item(pos, 7);
+    }
 }

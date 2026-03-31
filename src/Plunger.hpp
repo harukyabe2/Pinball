@@ -9,6 +9,8 @@ class Plunger
 
         void Draw() const;
 
+        void PlaySound() const;
+
         void SetPosition(const Vec2& pos);
     private:
         P2Body mBody;
