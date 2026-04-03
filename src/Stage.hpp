@@ -5,6 +5,8 @@
 #include "Flipper.hpp"
 #include "Plunger.hpp"
 #include "Ball.hpp"
+#include "Slot.hpp"
+#include "Trigger.hpp"
 
 class Stage
 {
@@ -21,6 +23,7 @@ class Stage
 
         const Flipper& GetFlipper(bool isLeft) const { return isLeft ? mLeftFlipper : mRightFlipper; }
         const Plunger& GetPlunger() const { return mPlunger; }
+        Slot& GetSlot() { return mSlot; }
     private:
         LineString mCreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments);
         void LoadFirstStage(P2World& world);
@@ -34,4 +37,6 @@ class Stage
         Vec2 mRightFlipperAnchor;
         Flipper mLeftFlipper;
         Flipper mRightFlipper;
+        Slot mSlot;
+        Trigger mTrigger;
 };

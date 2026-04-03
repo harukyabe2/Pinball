@@ -90,6 +90,9 @@ void Game::UpdateGame()
     // Check collisions and update score
     mScore += mStage.CheckItemCollisions(mBall.GetPos(), 12.0);
 
+    // Check slot jackpot
+    mScore += mStage.GetSlot().CheckJackpot();
+
     // Update items
     mStage.UpdateItems();
 
@@ -132,6 +135,14 @@ void Game::LoadData()
     AudioAsset::Register(U"Bumper", U"sound/Bumper.wav");
     AudioAsset::Register(U"Flipper", U"sound/Flipper.wav");
     AudioAsset::Register(U"Plunger", U"sound/Plunger.wav");
+    
+    // Register texture
+    TextureAsset::Register(U"Seven", U"7️⃣"_emoji);
+    TextureAsset::Register(U"Diamond", U"💎"_emoji);
+    TextureAsset::Register(U"Trump", U"🃏"_emoji);
+    TextureAsset::Register(U"Grape", U"🍇"_emoji);
+    TextureAsset::Register(U"Cherry", U"🍒"_emoji);
+    TextureAsset::Register(U"Trigger", U"👾"_emoji);
 }
 
 

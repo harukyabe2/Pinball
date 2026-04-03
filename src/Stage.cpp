@@ -34,6 +34,13 @@ void Stage::Update(double deltaTime, Ball& ball, bool keySpace)
         mCharge = 0.0;
     }
 
+    mTrigger.Update();
+
+    if (mTrigger.CheckHit(ball.GetPos(), 12.0))
+    {
+        mSlot.StartSpin();
+    }
+    mSlot.Update();
 }
 
 // Draw
@@ -63,6 +70,12 @@ void Stage::Draw() const
     {
         item.Draw();
     }
+
+    // Draw slot
+    mSlot.Draw();
+
+    // Draw trigger
+    mTrigger.Draw();
 }
 
 // Update bumpers
@@ -184,9 +197,16 @@ void Stage::LoadFirstStage(P2World& world)
         Vec2 pos = OffsetCircular(Vec2{-250, -185}, 170, 60_deg + (i * 3_deg));
         mItems << Item(pos, 7);
     }
-    for (int32 i = 0; i < 120; i += 10)
-    {
-        Vec2 pos = OffsetCircular(Vec2{-250, 150}, 70, 0_deg + (i * 3_deg));
-        mItems << Item(pos, 7);
-    }
+    // On hold
+    // for (int32 i = 0; i < 120; i += 10)
+    // {
+    //     Vec2 pos = OffsetCircular(Vec2{-250, 150}, 70, 0_deg + (i * 3_deg));
+    //     mItems << Item(pos, 7);
+    // }
+
+    // Create slot
+    mSlot = Slot(Vec2{-250, 100});
+
+    // Create trigger
+    mTrigger = Trigger(Vec2{-250, -185}, 80.0, 20.0);
 }
