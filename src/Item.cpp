@@ -9,7 +9,7 @@ Item::Item(Vec2 pos, double r)
 
 void Item::Update()
 {
-    if (not mIsActive && mTimer.sF() > 30.0)
+    if (not mIsActive && mTimer.sF() > 15.0)
     {
         mIsActive = true;
         mTimer.restart();

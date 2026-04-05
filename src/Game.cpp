@@ -135,6 +135,7 @@ void Game::LoadData()
     AudioAsset::Register(U"Bumper", U"sound/Bumper.wav");
     AudioAsset::Register(U"Flipper", U"sound/Flipper.wav");
     AudioAsset::Register(U"Plunger", U"sound/Plunger.wav");
+    AudioAsset::Register(U"Slot", U"sound/Slot.wav");
     
     // Register texture
     TextureAsset::Register(U"Seven", U"7️⃣"_emoji);

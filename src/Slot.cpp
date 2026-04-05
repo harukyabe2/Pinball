@@ -3,9 +3,11 @@
 Slot::Slot(const Vec2& pos)
 : mSlotItems{U"Seven", U"Diamond", U"Trump", U"Grape", U"Cherry"}
 , mCurrentIndexes{0, 2, 4}
+, mResultIndex(0)
 , mPos{pos}
 , mIsSpinning(false)
 , mIsAligned(false)
+, mWillWin(false)
 , mTimer(StartImmediately::Yes)
 {
 }
@@ -17,7 +19,7 @@ void Slot::Update()
         return;
     }
 
-    if (mTimer.sF() / 0.1 > 1) 
+    if (Periodic::Square0_1(0.1s)) 
     {
         mCurrentIndexes[0] = Random(0, 4);
         mCurrentIndexes[1] = Random(0, 4);
@@ -29,9 +31,23 @@ void Slot::Update()
         mIsSpinning = false;
         mTimer.reset();
 
-        if (mCurrentIndexes[0] == mCurrentIndexes[1] && mCurrentIndexes[1] == mCurrentIndexes[2])
+        if (mWillWin)
         {
+            mCurrentIndexes[0] = mResultIndex;
+            mCurrentIndexes[1] = mResultIndex;
+            mCurrentIndexes[2] = mResultIndex;
+
             mIsAligned = true;
+        }
+        else
+        {
+            mCurrentIndexes[0] = Random(0, 4);
+            mCurrentIndexes[1] = Random(0, 4);
+
+            while (mCurrentIndexes[0] == mCurrentIndexes[1] && mCurrentIndexes[1] == mCurrentIndexes[2])
+            {
+                mCurrentIndexes[2] = Random(0, 4);
+            }
         }
     }
 }
@@ -55,7 +71,47 @@ void Slot::StartSpin()
 
     mIsSpinning = true;
     mIsAligned = false;
+    mWillWin = false;
     mTimer.restart();
+
+    AudioAsset(U"Slot").playOneShot();
+
+    double r = Random();
+
+    if (r < 0.05)
+    {
+        // Seven
+        mResultIndex = 0;
+        mWillWin = true;
+    }
+    else if (RandomBool(0.1))
+    {
+        // Diamond
+        mResultIndex = 1;
+        mWillWin = true;
+    }
+    else if (RandomBool(0.15))
+    {
+        // Trump
+        mResultIndex = 2;
+        mWillWin = true;
+    }
+    else if (RandomBool(0.2))
+    {
+        // Grape
+        mResultIndex = 3;
+        mWillWin = true;
+    }
+    else if (RandomBool(0.3))
+    {
+        // Cherry
+        mResultIndex = 4;
+        mWillWin = true;
+    }
+    else
+    {
+        mWillWin = false;
+    }
 }
 
 int32 Slot::CheckJackpot()

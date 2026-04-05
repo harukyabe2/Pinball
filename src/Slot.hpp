@@ -15,8 +15,10 @@ class Slot
     private:
         Array<String> mSlotItems;
         Array<int32> mCurrentIndexes;
+        int32 mResultIndex;
         Vec2 mPos;
         bool mIsSpinning;
         bool mIsAligned;
+        bool mWillWin;
         Stopwatch mTimer;
 };

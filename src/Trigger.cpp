@@ -11,7 +11,7 @@ Trigger::Trigger(Vec2 centerPos, double orbitRadius, double hitRadius)
 
 void Trigger::Update()
 {
-    if (not mIsActive && mTimer.sF() > 10.0)
+    if (not mIsActive && mTimer.sF() > 5.0)
     {
         mIsActive = true;
         mTimer.restart();
