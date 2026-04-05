@@ -84,25 +84,25 @@ void Slot::StartSpin()
         mResultIndex = 0;
         mWillWin = true;
     }
-    else if (RandomBool(0.1))
+    else if (r < 0.1)
     {
         // Diamond
         mResultIndex = 1;
         mWillWin = true;
     }
-    else if (RandomBool(0.15))
+    else if (r < 0.15)
     {
         // Trump
         mResultIndex = 2;
         mWillWin = true;
     }
-    else if (RandomBool(0.2))
+    else if (r < 0.2)
     {
         // Grape
         mResultIndex = 3;
         mWillWin = true;
     }
-    else if (RandomBool(0.3))
+    else if (r < 0.3)
     {
         // Cherry
         mResultIndex = 4;
