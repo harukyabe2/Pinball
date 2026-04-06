@@ -9,9 +9,8 @@ Windows，MacOS<br>
 <br>
 
 # 利用ツール<br>
-フレームワーク：Siv3D<br>
-使用言語：C++<br>
-<br>
+<img src="https://img.shields.io/badge/-C++-00599C.svg?logo=c%2B%2B&style=flat-square&logoColor=white" alt="C++"> <img src="https://img.shields.io/badge/-Siv3D-00A4E8.svg?style=flat-square&logoColor=white" alt="Siv3D">
+
 アセット利用情報<br>
 Sound Effects: [OtoLogic](https://otologic.jp/)
 <br>
