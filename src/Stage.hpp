@@ -20,23 +20,35 @@ class Stage
         void UpdateItems();
         void UpdateFlippers(bool keyF, bool keyJ);
         int32 CheckItemCollisions(const Vec2& ballPos, double ballRadius);
-
-        const Flipper& GetFlipper(bool isLeft) const { return isLeft ? mLeftFlipper : mRightFlipper; }
-        const Plunger& GetPlunger() const { return mPlunger; }
-        Slot& GetSlot() { return mSlot; }
+        int32 CheckSlotJackpot();
+        void PlayFlipperSound();
+        void PlayPlungerSound();
     private:
-        LineString mCreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments);
+        LineString CreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments) const;
         void LoadFirstStage(P2World& world);
 
-        Array<P2Body> mWalls;
-        Array<Bumper> mBumpers;
-        Array<Item> mItems;
-        Plunger mPlunger;
-        double mCharge;
+        // Flippers
         Vec2 mLeftFlipperAnchor;
         Vec2 mRightFlipperAnchor;
         Flipper mLeftFlipper;
         Flipper mRightFlipper;
+
+        // Plunger
+        Plunger mPlunger;
+        double mCharge;
+
+        // Walls
+        Array<P2Body> mWalls;
+
+        // Bumpers
+        Array<Bumper> mBumpers;
+
+        // Items
+        Array<Item> mItems;
+
+        // Slot
         Slot mSlot;
+
+        // Trigger
         Trigger mTrigger;
 };

@@ -1,21 +1,27 @@
 #include "Item.hpp"
 
+// Constant
+constexpr double ITEM_COOLTIME = 15.0;
+
+// Constructor
 Item::Item(Vec2 pos, double r)
 : mCircle(pos, r)
 , mIsActive(true)
-, mTimer(StartImmediately::Yes)
+, mTimer()
 {
 }
 
+// Update item state
 void Item::Update()
 {
-    if (not mIsActive && mTimer.sF() > 15.0)
+    if (not mIsActive && mTimer.sF() > ITEM_COOLTIME)
     {
         mIsActive = true;
         mTimer.restart();
     }
 }
 
+// Draw item
 void Item::Draw() const
 {
     if (mIsActive)
@@ -26,6 +32,7 @@ void Item::Draw() const
     }
 }
 
+// Check if item is hit by ball
 bool Item::CheckHit(const Vec2& ballPos, double ballRadius)
 {
     if (!mIsActive)

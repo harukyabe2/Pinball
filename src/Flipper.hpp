@@ -10,8 +10,8 @@ class Flipper
         void Draw() const;
 
         void AddTorque(double torque);
-        void PlaySound() const;
     private:
+        // Physics
         P2Body mAnchorBody;
         P2Body mBody;
         P2PivotJoint mJoint;

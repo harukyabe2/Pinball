@@ -1,11 +1,15 @@
 #include "Game.hpp"
 
+// Constants
+constexpr double DEADZONE_Y = 400.0;
+constexpr double BALL_RADIUS = 12.0;
+
 // Constructor
 Game::Game()
 : mCamera{Vec2{0, 0}, 1.0, CameraControl::None_}
 , mStepTime(1.0 / 200.0)
 , mAccumulatedTime(0.0)
-, mBall(mWorld)
+, mBall(mWorld, Vec2{55.5, 0}, BALL_RADIUS)
 , mStage(mWorld)
 , mKeyFIsPressed(false)
 , mKeyJIsPressed(false)
@@ -49,22 +53,22 @@ void Game::RunLoop()
 void Game::ProcessInput()
 {
     // Flipper controls
+    mKeyFIsPressed = KeyF.pressed();
     if (KeyF.down())
     {
-        mStage.GetFlipper(true).PlaySound();
-    }
-    mKeyFIsPressed = KeyF.pressed();
-    if (KeyJ.down())
-    {
-        mStage.GetFlipper(false).PlaySound();
+        mStage.PlayFlipperSound();
     }
     mKeyJIsPressed = KeyJ.pressed();
+    if (KeyJ.down())
+    {
+        mStage.PlayFlipperSound();
+    }
 
     // Plunger control
     mKeySpaceIsPressed = KeySpace.pressed();
     if (KeySpace.up())
     {
-        mStage.GetPlunger().PlaySound();
+        mStage.PlayPlungerSound();
     }
 }
 
@@ -80,7 +84,10 @@ void Game::UpdateGame()
     // Update physics
     for (mAccumulatedTime += deltaTime; mStepTime <= mAccumulatedTime; mAccumulatedTime -= mStepTime)
     {
+        // Update Flippers
         mStage.UpdateFlippers(mKeyFIsPressed, mKeyJIsPressed);
+
+        // Update physics world
         mWorld.update(mStepTime);
 
         // Update bumpers
@@ -88,38 +95,41 @@ void Game::UpdateGame()
     }
 
     // Check collisions and update score
-    mScore += mStage.CheckItemCollisions(mBall.GetPos(), 12.0);
+    mScore += mStage.CheckItemCollisions(mBall.GetPos(), BALL_RADIUS);
 
-    // Check slot jackpot
-    mScore += mStage.GetSlot().CheckJackpot();
+    // Check slot jackpot and update score
+    mScore += mStage.CheckSlotJackpot();
 
     // Update items
     mStage.UpdateItems();
 
     // Check if the ball is out of bounds
-    if (mBallCount > 0 && mBall.GetPos().y > 400)
+    if (mBallCount > 0 && mBall.GetPos().y > DEADZONE_Y)
     {
         mBall.Delete();
         --mBallCount;
         if (mBallCount > 0)
         {
-            mBall = Ball(mWorld);
+            mBall = Ball(mWorld, Vec2{55.5, 0}, BALL_RADIUS);
         }
     }
 }
 
 // Render the game
-void Game::GenerateOutput()
+void Game::GenerateOutput() const
 {
+    // Set background color
     Scene::SetBackground(Palette::Black);
 
+    // Set camera
     const auto t = mCamera.createTransformer();
 
+    // Draw stage and ball
     mStage.Draw();
-    mBall.Draw();
     mGameFrame.drawClosed(5, Palette::White);
+    mBall.Draw();
 
-    // Draw game elements
+    // Draw game UI
     FontAsset(U"UI")(U"SCORE\n{:0>5}"_fmt(mScore)).drawAt(300, -300);
     FontAsset(U"UI")(U"BALL\n  {:0>2}"_fmt(mBallCount)).drawAt(300, -100);
 }
@@ -145,7 +155,6 @@ void Game::LoadData()
     TextureAsset::Register(U"Cherry", U"🍒"_emoji);
     TextureAsset::Register(U"Trigger", U"👾"_emoji);
 }
-
 
 // Shutdown the game
 void Game::Shutdown()

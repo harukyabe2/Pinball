@@ -13,10 +13,15 @@ class Slot
         void StartSpin();
         int32 CheckJackpot();
     private:
-        Array<String> mSlotItems;
-        Array<int32> mCurrentIndexes;
+        // Slot items
+        String mSlotItems[5];
+        int32 mCurrentIndexes[3];
         int32 mResultIndex;
+
+        // Slot pos
         Vec2 mPos;
+
+        // Slot state
         bool mIsSpinning;
         bool mIsAligned;
         bool mWillWin;

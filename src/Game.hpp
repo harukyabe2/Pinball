@@ -7,13 +7,14 @@ class Game
 {
     public:
         Game();
+
         bool Initialize();
         void RunLoop();
         void Shutdown();
     private:
         void ProcessInput();
         void UpdateGame();
-        void GenerateOutput();
+        void GenerateOutput() const;
         void LoadData();
 
         // Camera

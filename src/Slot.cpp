@@ -1,5 +1,6 @@
 #include "Slot.hpp"
 
+// Constructor
 Slot::Slot(const Vec2& pos)
 : mSlotItems{U"Seven", U"Diamond", U"Trump", U"Grape", U"Cherry"}
 , mCurrentIndexes{0, 2, 4}
@@ -8,10 +9,11 @@ Slot::Slot(const Vec2& pos)
 , mIsSpinning(false)
 , mIsAligned(false)
 , mWillWin(false)
-, mTimer(StartImmediately::Yes)
+, mTimer()
 {
 }
 
+// Update slot state
 void Slot::Update()
 {
     if (not mIsSpinning)
@@ -19,6 +21,7 @@ void Slot::Update()
         return;
     }
 
+    // Blinking
     if (Periodic::Square0_1(0.1s)) 
     {
         mCurrentIndexes[0] = Random(0, 4);
@@ -26,6 +29,7 @@ void Slot::Update()
         mCurrentIndexes[2] = Random(0, 4);
     }
 
+    // Stop spinning and determine result
     if (mTimer.sF() > 2.0)
     {
         mIsSpinning = false;
@@ -52,6 +56,7 @@ void Slot::Update()
     }
 }
 
+// Draw slot
 void Slot::Draw() const
 {
     for (int32 i = 0; i < 3; ++i)
@@ -62,6 +67,7 @@ void Slot::Draw() const
     }
 }
 
+// Spin slot and determine result
 void Slot::StartSpin()
 {
     if (mIsSpinning)
@@ -71,7 +77,7 @@ void Slot::StartSpin()
 
     mIsSpinning = true;
     mIsAligned = false;
-    mWillWin = false;
+    mWillWin = true;
     mTimer.restart();
 
     AudioAsset(U"Slot").playOneShot();
@@ -82,31 +88,26 @@ void Slot::StartSpin()
     {
         // Seven
         mResultIndex = 0;
-        mWillWin = true;
     }
     else if (r < 0.1)
     {
         // Diamond
         mResultIndex = 1;
-        mWillWin = true;
     }
     else if (r < 0.15)
     {
         // Trump
         mResultIndex = 2;
-        mWillWin = true;
     }
     else if (r < 0.2)
     {
         // Grape
         mResultIndex = 3;
-        mWillWin = true;
     }
     else if (r < 0.3)
     {
         // Cherry
         mResultIndex = 4;
-        mWillWin = true;
     }
     else
     {
@@ -116,36 +117,20 @@ void Slot::StartSpin()
 
 int32 Slot::CheckJackpot()
 {
-    int32 score = 0;
-    if (mIsAligned)
+    if (not mIsAligned)
     {
-        mIsAligned = false;
-
-        if (mCurrentIndexes[0] == 0)
-        {
-            // Seven
-            score = 1000;
-        }
-        else if (mCurrentIndexes[0] == 1)
-        {
-            // Diamond
-            score = 500;
-        }
-        else if (mCurrentIndexes[0] == 2)
-        {
-            // Trump
-            score = 300;
-        }
-        else if (mCurrentIndexes[0] == 3)
-        {
-            // Grape
-            score = 200;
-        }
-        else if (mCurrentIndexes[0] == 4)
-        {
-            // Cherry
-            score = 100;
-        }
+        return 0;
     }
-    return score;
+
+    mIsAligned = false;
+
+    constexpr int32 SCORE[] = {
+        1000, // Seven
+        500,  // Diamond
+        300,  // Trump
+        200,  // Grape
+        100   // Cherry
+    };
+
+    return SCORE[mCurrentIndexes[0]];
 }

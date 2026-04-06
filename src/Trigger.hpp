@@ -12,9 +12,14 @@ class Trigger
 
         bool CheckHit(const Vec2& ballPos, double ballRadius);
     private:
+        // Collision
         Circle mCircle;
+
+        // Circle state
         bool mIsActive;
         Stopwatch mTimer;
+
+        // Parameters
         Vec2 mCenterPos;
         double mOrbitRadius;
 };

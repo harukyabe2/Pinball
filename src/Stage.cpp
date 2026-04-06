@@ -1,5 +1,10 @@
 #include "Stage.hpp"
 
+// Constants
+constexpr double PLUNGER_MAX_CHARGE = 180.0;
+constexpr double BALL_RADIUS = 12.0;
+constexpr int32 ITEM_SCORE = 100;
+
 // Constructor
 Stage::Stage(P2World& world)
 : mCharge(0.0)
@@ -7,17 +12,17 @@ Stage::Stage(P2World& world)
     LoadFirstStage(world);
 }
 
-// Update stage
+// Update stage elements
 void Stage::Update(double deltaTime, Ball& ball, bool keySpace)
 {
     // Update plunger and ball
     Vec2 plungerPos = Vec2{60, 200};
     if (keySpace)
     {
-        mCharge += 180.0 * deltaTime;
-        if (mCharge > 180.0)
+        mCharge += PLUNGER_MAX_CHARGE * deltaTime;
+        if (mCharge > PLUNGER_MAX_CHARGE)
         {
-            mCharge = 180.0;
+            mCharge = PLUNGER_MAX_CHARGE;
         }
         mPlunger.SetPosition(plungerPos + Vec2{0, mCharge});
     }
@@ -34,9 +39,11 @@ void Stage::Update(double deltaTime, Ball& ball, bool keySpace)
         mCharge = 0.0;
     }
 
+    // Update trigger
     mTrigger.Update();
 
-    if (mTrigger.CheckHit(ball.GetPos(), 12.0))
+    // Update slot
+    if (mTrigger.CheckHit(ball.GetPos(), BALL_RADIUS))
     {
         mSlot.StartSpin();
     }
@@ -71,11 +78,11 @@ void Stage::Draw() const
         item.Draw();
     }
 
-    // Draw slot
-    mSlot.Draw();
-
     // Draw trigger
     mTrigger.Draw();
+
+    // Draw slot
+    mSlot.Draw();
 }
 
 // Update bumpers
@@ -103,6 +110,12 @@ void Stage::UpdateFlippers(bool keyF, bool keyJ)
     mRightFlipper.AddTorque(keyJ ? 80000 : -40000);
 }
 
+// Check slot jackpot
+int32 Stage::CheckSlotJackpot()
+{
+    return mSlot.CheckJackpot();
+}
+
 // Check item collisions and return the score
 int32 Stage::CheckItemCollisions(const Vec2& ballPos, double ballRadius)
 {
@@ -112,15 +125,27 @@ int32 Stage::CheckItemCollisions(const Vec2& ballPos, double ballRadius)
     {
         if (item.CheckHit(ballPos, ballRadius))
         {
-            score = 100;
+            score += ITEM_SCORE;
         }
     }
 
     return score;
 }
 
+// Play flipper sound
+void Stage::PlayFlipperSound()
+{
+    AudioAsset(U"Flipper").playOneShot();
+}
+
+// Play plunger sound
+void Stage::PlayPlungerSound()
+{
+    AudioAsset(U"Plunger").playOneShot();
+}
+
 // Create circle wall points
-LineString Stage::mCreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments)
+LineString Stage::CreateCircleWall(const Vec2& center, double radius, double angleOffset, int32 segments) const
 {
     LineString wall;
     for (int32 i = 0; i < segments; ++i)
@@ -131,7 +156,7 @@ LineString Stage::mCreateCircleWall(const Vec2& center, double radius, double an
     return wall;
 }
 
-// Load Stage
+// Load first stage
 void Stage::LoadFirstStage(P2World& world)
 {
     // Create flippers
@@ -146,9 +171,9 @@ void Stage::LoadFirstStage(P2World& world)
     // Create walls
     LineString outerWall;
     outerWall << Vec2{-320, 390} << Vec2{-320, 360} << Vec2{-485, 290} << Vec2{-490, 15};
-    outerWall.append(mCreateCircleWall(Vec2{-250, -185}, 200, 225_deg, 46));
+    outerWall.append(CreateCircleWall(Vec2{-250, -185}, 200, 225_deg, 46));
     outerWall << Vec2{-250, -385};
-    outerWall.append(mCreateCircleWall(Vec2{-13, -287}, 100, 0_deg, 31));
+    outerWall.append(CreateCircleWall(Vec2{-13, -287}, 100, 0_deg, 31));
     outerWall << Vec2{85, 0} << Vec2{85, 390} << Vec2{35, 390};
     Polygon thickOuterWall = outerWall.calculateRoundBuffer(10);
     mWalls << world.createPolygon(P2Static, Vec2{0, 0}, thickOuterWall, P2Material{}, P2Filter{0x0002, 0x0001});
@@ -156,9 +181,9 @@ void Stage::LoadFirstStage(P2World& world)
     LineString innerWall;
     LineString tmp;
     tmp << Vec2{-13, -337} << Vec2{-43, -337};
-    tmp.append(mCreateCircleWall(Vec2{-250, -185}, 200, 60_deg, 26));
+    tmp.append(CreateCircleWall(Vec2{-250, -185}, 200, 60_deg, 26));
     tmp << Vec2{-15, 15} << Vec2{-15, 290} << Vec2{-180, 360} << Vec2{-180, 390};
-    innerWall.append(mCreateCircleWall(Vec2{-13, -287}, 50, 0_deg, 31));
+    innerWall.append(CreateCircleWall(Vec2{-13, -287}, 50, 0_deg, 31));
     innerWall  << Vec2{35, 0} << Vec2{35, 390};
     innerWall.reverse();
     innerWall.append(tmp);
@@ -166,7 +191,7 @@ void Stage::LoadFirstStage(P2World& world)
     mWalls << world.createPolygon(P2Static, Vec2{0, 0}, thickInnerWall, P2Material{}, P2Filter{0x0002, 0x0001});
 
     LineString centerWall;
-    centerWall.append(mCreateCircleWall(Vec2{-250, -185}, 140, 60_deg, 21));
+    centerWall.append(CreateCircleWall(Vec2{-250, -185}, 140, 60_deg, 21));
     Polygon thickCenterWall = centerWall.calculateRoundBuffer(10);
     mWalls << world.createPolygon(P2Static, Vec2{0, 0}, thickCenterWall, P2Material{});
 
@@ -182,7 +207,7 @@ void Stage::LoadFirstStage(P2World& world)
     mBumpers.push_back(Bumper(world, thickRightTriangleBumper));
 
     LineString circleBumper;
-    circleBumper.append(mCreateCircleWall(Vec2{-250, -185}, 20, 0_deg, 120));
+    circleBumper.append(CreateCircleWall(Vec2{-250, -185}, 20, 0_deg, 120));
     Polygon thickCircleBumper = circleBumper.calculateRoundBuffer(3);
     mBumpers.push_back(Bumper(world, thickCircleBumper));
 
@@ -197,12 +222,6 @@ void Stage::LoadFirstStage(P2World& world)
         Vec2 pos = OffsetCircular(Vec2{-250, -185}, 170, 60_deg + (i * 3_deg));
         mItems << Item(pos, 7);
     }
-    // On hold
-    // for (int32 i = 0; i < 120; i += 10)
-    // {
-    //     Vec2 pos = OffsetCircular(Vec2{-250, 150}, 70, 0_deg + (i * 3_deg));
-    //     mItems << Item(pos, 7);
-    // }
 
     // Create slot
     mSlot = Slot(Vec2{-250, 100});

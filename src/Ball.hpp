@@ -4,16 +4,17 @@
 class Ball
 {
     public:
-        Ball(P2World& world);
+        Ball(P2World& world, const Vec2& pos, double radius);
 
         void Draw() const;
 
         void Delete();
         void AddImpulse(const Vec2& impulse);
 
-        const Vec2 GetPos();
+        Vec2 GetPos() const;
         void SetPos(const Vec2& pos);
         void SetState(bool isAwake);
     private:
+        // Physics
         P2Body mBody;
 };
