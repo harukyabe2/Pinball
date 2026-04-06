@@ -3,25 +3,20 @@
 # 動画<br>
 完成後、YouTubeのリンクを貼る
 
-# 動作環境<br>
-Windows，MacOS<br>
-実行方法を書く(予定ではGitHub Releasesを使う)
-<br>
-
 # 利用ツール<br>
 <img src="https://img.shields.io/badge/-C++-00599C.svg?logo=c%2B%2B&style=flat-square&logoColor=white" alt="C++"> <img src="https://img.shields.io/badge/-Siv3D-00A4E8.svg?style=flat-square&logoColor=white" alt="Siv3D">
 
-アセット利用情報<br>
+**アセット利用情報**<br>
 Sound Effects: [OtoLogic](https://otologic.jp/)
 <br>
 
 # 操作説明<br>
-Spaceキーで球を発射<br>
-FキーおよびJキーで左右のフリッパーを操作
+**Space**キーで球を発射<br>
+**F**キーおよび**J**キーで左右のフリッパーを操作
 <br>
 
 # 制作<br>
-個人制作<br>
+**個人制作**<br>
 制作期間：8日
 <br>
 
@@ -30,26 +25,33 @@ FキーおよびJキーで左右のフリッパーを操作
 <br>
 
 # 設計と機能説明<br>
-技術的なアピールポイント<br>
+**技術的なアピールポイント**<br>
 ・物理演算が一定の時間ステップで処理されるように設計<br>
 ・各ギミックの内部状態は外から直接操作せず，親クラスであるStageクラスを経由してやりとり<br>
 ・追加ステージの作成やギミック追加がしやすくなるようにし，拡張性を持たせた<br>
 
-Gameクラス<br>
+**クラス説明**<br>
+
+**Gameクラス**<br>
 ゲーム全体の心臓部であり，アセットの初期化，入力処理，固定タイムステップでの物理演算ループ，描画を統括する．
 <br>
-Ballクラス<br>
+**Ballクラス**<br>
 物理演算上の動的ボディを持つボール本体であり，状態管理や衝撃の適用などボール単体の振る舞いをカプセル化する．
 <br>
-Stageクラス<br>
+**Stageクラス**<br>
 ステージ上のすべてのギミックを保有・管理するクラス．ボールとの衝突判定やスコア加算のロジックを集約し，Gameクラスに対してインターフェースを提供する．将来的なステージの追加を容易にする設計になっている．
 <br>
-Slotクラス<br>
+**Slotクラス**<br>
 トリガーで作動するスロットマシン．内部に当たり状態を記憶する状態遷移フラグを持ち，乱数による確率調整によるスコア計算を実装している．
 <br>
-Triggerクラス<br>
+**Triggerクラス**<br>
 ストップウォッチを利用し，座標計算とクールダウンの管理を独立して行っている．
 <br>
-Bumper，Flipper，Plunger，Itemクラス<br>
+**Bumper，Flipper，Plunger，Itemクラス**<br>
 それぞれが物理ボディと描画ロジック，ストップウォッチによる発光アニメーションなどの独立した機能を持っている．
+<br>
+
+# 動作環境<br>
+Windows，MacOS<br>
+実行方法を書く(予定ではGitHub Releasesを使う)
 <br>
