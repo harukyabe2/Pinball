@@ -9,6 +9,7 @@ class Slot
 
         void Update();
         void Draw() const;
+        void Reset();
 
         void StartSpin();
         int32 CheckJackpot();

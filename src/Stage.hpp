@@ -15,6 +15,7 @@ class Stage
 
         void Update(double deltaTime, Ball& ball, bool keySpace);
         void Draw() const;
+        void Reset();
 
         void UpdateBumpers(const HashTable<P2ContactPair, P2Collision>& collisions);
         void UpdateItems();

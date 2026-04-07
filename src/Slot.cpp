@@ -67,6 +67,19 @@ void Slot::Draw() const
     }
 }
 
+// Reset slot state
+void Slot::Reset()
+{
+    mIsSpinning = false;
+    mIsAligned = false;
+    mWillWin = false;
+    mTimer.reset();
+    
+    mCurrentIndexes[0] = 0;
+    mCurrentIndexes[1] = 2;
+    mCurrentIndexes[2] = 4;
+}
+
 // Spin slot and determine result
 void Slot::StartSpin()
 {

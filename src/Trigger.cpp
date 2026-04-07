@@ -36,6 +36,13 @@ void Trigger::Draw() const
     }
 }
 
+// Reset trigger state
+void Trigger::Reset()
+{
+    mIsActive = true;
+    mTimer.reset();
+}
+
 // Check if trigger is hit by ball
 bool Trigger::CheckHit(const Vec2& ballPos, double ballRadius)
 {

@@ -3,6 +3,13 @@
 #include "Ball.hpp"
 #include "Stage.hpp"
 
+// Game state
+enum class GameState
+{
+    isPlaying,
+    isGameOver
+};
+
 class Game
 {
     public:
@@ -16,6 +23,9 @@ class Game
         void UpdateGame();
         void GenerateOutput() const;
         void LoadData();
+
+        // Game state
+        GameState mState;
 
         // Camera
         Camera2D mCamera;
@@ -35,6 +45,8 @@ class Game
         bool mKeyFIsPressed;
         bool mKeyJIsPressed;
         bool mKeySpaceIsPressed;
+        bool mKeyCIsPressed;
+        bool mKeyEIsPressed;
 
         // Game elements
         int32 mScore;

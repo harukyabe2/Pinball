@@ -85,6 +85,20 @@ void Stage::Draw() const
     mSlot.Draw();
 }
 
+// Reset stage elements
+void Stage::Reset()
+{
+    mCharge = 0.0;
+    
+    for (auto& item : mItems)
+    {
+        item.Reset();
+    }
+    
+    mTrigger.Reset();
+    mSlot.Reset();
+}
+
 // Update bumpers
 void Stage::UpdateBumpers(const HashTable<P2ContactPair, P2Collision>& collisions)
 {

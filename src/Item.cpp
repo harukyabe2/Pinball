@@ -32,6 +32,13 @@ void Item::Draw() const
     }
 }
 
+// Reset item state
+void Item::Reset()
+{
+    mIsActive = true;
+    mTimer.reset();
+}
+
 // Check if item is hit by ball
 bool Item::CheckHit(const Vec2& ballPos, double ballRadius)
 {

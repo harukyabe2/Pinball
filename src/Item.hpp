@@ -8,6 +8,7 @@ class Item
 
         void Update();
         void Draw() const;
+        void Reset();
 
         bool CheckHit(const Vec2& ballPos, double ballRadius);
     private:
