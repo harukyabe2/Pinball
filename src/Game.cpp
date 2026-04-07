@@ -190,11 +190,11 @@ void Game::LoadData()
     FontAsset::Register(U"UI", FontMethod::MSDF, 48, Typeface::Bold);
 
     // Register sound
-    AudioAsset::Register(U"Coin", U"sound/ItemCoin.wav");
-    AudioAsset::Register(U"Bumper", U"sound/Bumper.wav");
-    AudioAsset::Register(U"Flipper", U"sound/Flipper.wav");
-    AudioAsset::Register(U"Plunger", U"sound/Plunger.wav");
-    AudioAsset::Register(U"Slot", U"sound/Slot.wav");
+    AudioAsset::Register(U"Coin", Resource(U"sound/ItemCoin.wav"));
+    AudioAsset::Register(U"Bumper", Resource(U"sound/Bumper.wav"));
+    AudioAsset::Register(U"Flipper", Resource(U"sound/Flipper.wav"));
+    AudioAsset::Register(U"Plunger", Resource(U"sound/Plunger.wav"));
+    AudioAsset::Register(U"Slot", Resource(U"sound/Slot.wav"));
     
     // Register texture
     TextureAsset::Register(U"Seven", U"7️⃣"_emoji);

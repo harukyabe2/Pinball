@@ -43,6 +43,7 @@
 		6E935BEE2F7E854200E0D8E7 /* Slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E935BED2F7E854100E0D8E7 /* Slot.cpp */; };
 		6EAA8F1F2F793C7200C1B1F3 /* Plunger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */; };
 		6EBFCCCF2F7FB3D800D3D72A /* Trigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBFCCCE2F7FB3D800D3D72A /* Trigger.cpp */; };
+		6ED0DC552F84DE670001569B /* sound in Resources */ = {isa = PBXBuildFile; fileRef = 6ED0DC542F84DE640001569B /* sound */; };
 		6ED972FC2F760F8100DD91CF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED972FB2F760F8000DD91CF /* Game.cpp */; };
 		6EE5620A2F7A7C9D00B62437 /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EE562092F7A7C9C00B62437 /* Stage.cpp */; };
 		6EF911F42F7A178600C85C6D /* Bumper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF911F32F7A178500C85C6D /* Bumper.cpp */; };
@@ -93,6 +94,7 @@
 		6EAA8F1E2F793C7100C1B1F3 /* Plunger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Plunger.cpp; sourceTree = "<group>"; };
 		6EBFCCCD2F7FB3D800D3D72A /* Trigger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Trigger.hpp; sourceTree = "<group>"; };
 		6EBFCCCE2F7FB3D800D3D72A /* Trigger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Trigger.cpp; sourceTree = "<group>"; };
+		6ED0DC542F84DE640001569B /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sound; path = App/sound; sourceTree = "<group>"; };
 		6ED972FA2F760F8000DD91CF /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		6ED972FB2F760F8000DD91CF /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		6EE562082F7A7C9C00B62437 /* Stage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		2C1778791CE0A9D800BB8AD0 = {
 			isa = PBXGroup;
 			children = (
+				6ED0DC542F84DE640001569B /* sound */,
 				2C6906D72298140F00A427D0 /* engine */,
 				2C1778921CE0A9EA00BB8AD0 /* Info.plist */,
 				2C1778A21CE0B65500BB8AD0 /* icon.icns */,
@@ -275,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ED0DC552F84DE670001569B /* sound in Resources */,
 				2C6906D82298140F00A427D0 /* engine in Resources */,
 				2C1778A31CE0B65500BB8AD0 /* icon.icns in Resources */,
 			);
