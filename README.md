@@ -53,6 +53,15 @@ Sound Effects: [OtoLogic](https://otologic.jp/)
 <br>
 
 # 動作環境<br>
-Windows，MacOS<br>
-実行方法を書く(予定ではGitHub Releasesを使う)
+**MacOS**<br>
+**対応OS**: macOS（11.0）以降<br>
+**対応CPU**: Apple Silicon（M1/M2/M3）および Intel Mac<br>
+
+**実行方法**
+Releasesから**Pinball_macOS.zip**をダウンロードし，解凍します<br>
+解凍してできた**Pinball_macOS.app**を実行するとゲームが始まります<br>
+セキュリティ機能によって開けない場合は設定のプライバシーとセキュリティからこのまま開くを選択してください<br>
+
+**Windows**<br>
+まだ対応中です<br>
 <br>
