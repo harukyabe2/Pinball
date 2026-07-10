@@ -1,7 +1,7 @@
 ## ピンボールゲーム<br>
 
 # 動画<br>
-完成後、YouTubeのリンクを貼る
+[![プレイ動画](https://img.youtube.com/vi/A-W-D9Bpbb0/maxresdefault.jpg)](https://youtu.be/A-W-D9Bpbb0)
 
 # 利用ツール<br>
 <img src="https://img.shields.io/badge/-C++-00599C.svg?logo=c%2B%2B&style=flat-square&logoColor=white" alt="C++"> <img src="https://img.shields.io/badge/-Siv3D-00A4E8.svg?style=flat-square&logoColor=white" alt="Siv3D"><br>
