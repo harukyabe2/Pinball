@@ -1,7 +1,30 @@
 ## ピンボールゲーム<br>
+**以下のリンクから遊ぶことが可能です**<br>
+https://harukyabe2.github.io/Pinball/<br>
 
 # 動画<br>
 [![プレイ動画](https://img.youtube.com/vi/A-W-D9Bpbb0/maxresdefault.jpg)](https://youtu.be/A-W-D9Bpbb0)
+
+# 動作環境<br>
+**ブラウザで遊ぶ場合**<br>
+Google Chrome<br>
+
+**実行ファイルをダウンロードして遊ぶ場合**<br>
+
+**対応OS**: macOS（11.0）以降<br>
+
+**実行方法**<br>
+Releasesから**Pinball_macOS.zip**をダウンロードし，解凍します<br>
+解凍してできた**Pinball_macOS.app**を実行するとゲームが始まります<br>
+セキュリティ機能によって開けない場合は設定のプライバシーとセキュリティからこのまま開くを選択してください<br>
+
+**対応OS**: Windows 10 / 11<br>
+
+**実行方法**<br>
+Releasesから**Pinball_windows.zip**をダウンロードし，解凍します<br>
+解凍してできた**Pinball_windows.exe**を実行するとゲームが始まります<br>
+セキュリティ機能によって開けない場合は詳細情報から実行を選択してください<br>
+<br>
 
 # 利用ツール<br>
 <img src="https://img.shields.io/badge/-C++-00599C.svg?logo=c%2B%2B&style=flat-square&logoColor=white" alt="C++"> <img src="https://img.shields.io/badge/-Siv3D-00A4E8.svg?style=flat-square&logoColor=white" alt="Siv3D"><br>
@@ -51,24 +74,4 @@ Sound Effects: [OtoLogic](https://otologic.jp/)
 <br>
 **Bumper，Flipper，Plunger，Itemクラス**<br>
 それぞれが物理ボディと描画ロジック，ストップウォッチによる発光アニメーションなどの独立した機能を持っている．
-<br>
-
-# 動作環境<br>
-**MacOS**<br>
-
-**対応OS**: macOS（11.0）以降<br>
-
-**実行方法**<br>
-Releasesから**Pinball_macOS.zip**をダウンロードし，解凍します<br>
-解凍してできた**Pinball_macOS.app**を実行するとゲームが始まります<br>
-セキュリティ機能によって開けない場合は設定のプライバシーとセキュリティからこのまま開くを選択してください<br>
-
-**Windows**<br>
-
-**対応OS**: Windows 10 / 11<br>
-
-**実行方法**<br>
-Releasesから**Pinball_windows.zip**をダウンロードし，解凍します<br>
-解凍してできた**Pinball_windows.exe**を実行するとゲームが始まります<br>
-セキュリティ機能によって開けない場合は詳細情報から実行を選択してください<br>
 <br>
